@@ -90,8 +90,8 @@ environment variables (for internal use):
     }
 
     # export variables because python is a sub-process, and variables might have changed since initialization
-    for x in $(set | grep "^_OK_" | awk -F '=' '{print $1}'); do 
-        export "$x"="${!x}"
+    for x in $(set | grep --binary-files=text "^_OK_" | awk -F '=' '{print $1}'); do
+      export "$x"="${(P)x}"
     done
 
     local -r version="0.8.0"
